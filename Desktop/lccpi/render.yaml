@@ -1,0 +1,22 @@
+services:
+  # Backend web service
+  - type: web
+    name: rtc-whiteboard
+    env: node
+    plan: free
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: CLIENT_URL
+        sync: false
+    healthCheckPath: /
+    autoDeploy: true
+    # GitHub repository configuration
+    repo: https://github.com/khanapcalculus/lccpi
+    branch: main
+    buildCommand: npm install && npm run build
+    startCommand: node server/index.js
+    envVars:
+      - key: NODE
